@@ -1,0 +1,66 @@
+﻿@{
+    // Page Title
+    ViewBag.Title = "Numeric Sequence Generator";
+}
+
+<!DOCTYPE html>
+<html ng-app="NumericSequnce">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/bootstrap")
+</head>
+<body ng-controller="SequnceGeneratorControl" style="background-color:aliceblue">
+    @*Bootstrap styling*@
+    <div class="container">
+    <div class="row">
+    <div>
+    <h1>@ViewBag.Title</h1>
+    <form name="calculator" novalidate style="border:2px solid green;background-color:yellowgreen;padding-left:10px;">
+        <div class="form-group" ng-class="{ 'has-error': calculator.inputvalue.$invalid }">
+            <div class="row">
+                <div class="col-xs-3 col-sm-2 col-md-3">
+										<label class="control-label" for="inputvalue">Enter an Integer:</label><input type="number" class="form-control" name="inputvalue" id="inputvalue" min="0" required title="Please enter an Integer"
+                        ng-model="Value" pattern="^\d+$" ng-change="ValueChanged();"/><br /><input type="button" style="border-color:green;background-color:aliceblue;" value="Reset to Default" id="ResettoDefault" ng-click="ResettoDefault();" />
+												<br />
+                </div>
+            </div>
+
+            <div class="ng-cloak">
+                 <p class="text-danger" id="error-required" ng-show="calculator.inputvalue.$error.required">This field is required.</p>
+                 <p class="text-danger" id="error-atleastone" ng-show="calculator.inputvalue.$error.min">Please enter a value greater than zero.</p>
+                 <p class="text-danger" id="error-digitsonly" ng-show="calculator.inputvalue.$error.number">Only digitas are allowed.</p>
+                 <p class="text-danger" id="error-wholenumber" ng-show="calculator.inputvalue.$error.pattern">Only whole numbers are allowed.</p>
+            </div>
+        </div>
+    </form>
+				<div style="border:2px solid green;background-color:beige;padding-left:10px;">
+						<h3 style="color:green;">Numbers Sequnce <input type="checkbox" title="Show/Hide the Sequence" ng-model="mustHide" /></h3>
+						<div ng-hide="mustHide"><p><wn-sequence sequence="allNumbers" id="sequence-all" /></p></div>
+						<h3 style="color:green;">Odd Numbers Sequnce <input type="checkbox" title="Show/Hide the Sequence" ng-model="mustHide1" /></h3>
+						<div ng-hide="mustHide1"><p><wn-sequence sequence="oddNumbers" id="sequence-odd" /></p></div>
+								<h3 style="color:green;">Even Numbers Sequnce <input type="checkbox" title="Show/Hide the Sequence" ng-model="mustHide2" /></h3>
+						<div ng-hide="mustHide2">
+								<p><wn-sequence sequence="evenNumbers" id="sequence-even" /></p>
+						</div>
+								<h3 style="color:green;">Custom Sequnce <input type="checkbox" title="Show/Hide the Sequence" ng-model="mustHide3" /></h3>
+						<div ng-hide="mustHide3">
+								<p><wn-sequence sequence="customeSequence" id="sequence-custom" /></p>
+						</div>
+										<h3 style="color:green;">Fibonacci Series <input type="checkbox" title="Show/Hide the Sequence" ng-model="mustHide4" /></h3>
+						<div ng-hide="mustHide4">
+								<p><wn-sequence sequence="fibonacci" id="sequence-fibonacci" /></p>
+						</div>
+										</div>
+
+    </div>
+    </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/numericSequences")
+</body>
+</html>
+
